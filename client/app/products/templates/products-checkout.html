@@ -1,0 +1,115 @@
+<navbar></navbar>
+
+<div class="container">
+  <div class="row">
+    <h1>Carrinho</h1>
+    <ngcart-cart template-url="components/ngcart/cart.html"></ngcart-cart>
+  </div>
+
+  <div class="row">
+    <h1>Pague com PagSeguro ou PayPal</h1>
+    <p class="help-block">{{ errors }}</p><br>
+    <div class="col-md-6">
+      <!-- Declaração do formulário -->
+      <div>
+        <div ng-if="service=='http' || service == 'log'">
+            <button class="btn btn-primary" ng-click="checkout()" ng-disabled="!ngCart.getTotalItems()" ng-transclude>Checkout</button>
+        </div>
+        <p>
+          <form method="post" target="pagseguro"
+          action="https://pagseguro.uol.com.br/v2/checkout/payment.html">
+
+                  <!-- Campos obrigatórios -->
+                  <input name="receiverEmail" type="hidden" value="costa.danilofreitas@gmail.com">
+                  <input name="currency" type="hidden" value="BRL">
+
+                    <!-- Itens do pagamento (ao menos um item é obrigatório) -->
+                    <input name="itemId1" type="hidden" value="0001">
+                    <input name="itemDescription1" type="hidden" value="Notebook Prata">
+                    <input name="itemAmount1" type="hidden" value="24300.00">
+                    <input name="itemQuantity1" type="hidden" value="1">
+                    <input name="itemWeight1" type="hidden" value="1000">
+                    <input name="itemId2" type="hidden" value="0002">
+                    <input name="itemDescription2" type="hidden" value="Notebook Rosa">
+                    <input name="itemAmount2" type="hidden" value="25600.00">
+                    <input name="itemQuantity2" type="hidden" value="2">
+                    <input name="itemWeight2" type="hidden" value="750">
+
+
+
+                  <!-- Código de referência do pagamento no seu sistema (opcional) -->
+                  <input name="reference" type="hidden" value="REF1234">
+
+                  <!-- Informações de frete (opcionais) -->
+                  <input name="shippingType" type="hidden" value="1">
+                  <input name="shippingAddressPostalCode" type="hidden" value="01452002">
+                  <input name="shippingAddressStreet" type="hidden" value="Av. Brig. Faria Lima">
+                  <input name="shippingAddressNumber" type="hidden" value="1384">
+                  <input name="shippingAddressComplement" type="hidden" value="5o andar">
+                  <input name="shippingAddressDistrict" type="hidden" value="Jardim Paulistano">
+                  <input name="shippingAddressCity" type="hidden" value="Sao Paulo">
+                  <input name="shippingAddressState" type="hidden" value="SP">
+                  <input name="shippingAddressCountry" type="hidden" value="BRA">
+
+                  <!-- Dados do comprador (opcionais) -->
+                  <input name="senderName" type="hidden" value="José Comprador">
+                  <input name="senderAreaCode" type="hidden" value="11">
+                  <input name="senderPhone" type="hidden" value="56273440">
+                  <input name="senderEmail" type="hidden" value="comprador@uol.com.br">
+
+                  <!-- submit do form (obrigatório) -->
+                  <input alt="Pague com PagSeguro" name="submit"  type="image"
+
+              src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/120x53-pagar.gif"/>
+
+          </form>
+
+          <br></br>
+          <div ng-controller="ProductCheckoutCtrl as checkout">
+
+          <!--form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"-->
+          <form action=" https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+          <!--form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" ng-show="ngCart.getTotalItems()"-->
+          <!--form class="form" name="checkoutForm" data-ng-submit="checkout.pay()"-->
+            <!--Tipo do botão-->
+            <input type="hidden" name="cmd" value="_xclick" />
+
+            <!--Vendedor e URL de retorno, cancelamento e notificação-->
+            <input type="hidden" name="business" value="casafreitas.materiaiseletricos@gmail.com" />
+            <input type="hidden" name="return" value="http://localhost:9000/checkout" />
+            <input type="hidden" name="cancel" value="http://loja.com.br/cancelamento" />
+            <input type="hidden" name="notify_url" value="http://loja.com.br/notificacao" />
+
+            <!--Internacionalização e localização da página de pagamento-->
+            <input type="hidden" name="charset" value="utf-8" />
+            <input type="hidden" name="lc" value="BR" />
+            <input type="hidden" name="country_code" value="BR" />
+            <input type="hidden" name="currency_code" value="BRL" >
+
+            <!--Informações sobre o produto e seu valor-->
+            <input type="hidden" name="amount" value="172.00" />
+            <input type="hidden" name="item_name" value="Servico" />
+            <input type="hidden" name="quantity" value="1" />
+
+            <input type="hidden" name="item_name" value="{{ settings.paypal.item_name }}" />
+            <input type="hidden" name="item_number" value="{{ settings.paypal.item_number }}" />
+            <input type="hidden" name="amount" value="{{ ngCart.getSubTotal()}}" />
+            <input type="hidden" name="button_subtype" value="Servico" />
+            <input type="hidden" name="no_note" value="{{ settings.paypal.no_note }}" />
+            <input type="hidden" name="tax_rate" value="{{ ngCart.getTaxRate()}}" />
+            <input type="hidden" name="shipping" value="{{ ngCart.getShipping()}}" />
+            <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest" />
+
+            <!--Botão para submissão do formulário-->
+            <input type="image" src="https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal" />
+            <!--input type="image" ng-class="{ (checkoutForm) }" border="0" name="submit" alt="PayPal" /-->
+            <img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/BR/i/scr/pixel.gif" width="1" height="1" />
+          </form>
+          </div>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer></footer>

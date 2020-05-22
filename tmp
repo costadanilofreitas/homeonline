@@ -1,0 +1,39 @@
+[4mRunning "serve" task[24m
+
+[4mRunning "clean:server" (clean) task[24m
+[32m>> [39m0 paths cleaned.
+
+[4mRunning "env:all" (env) task[24m
+
+[4mRunning "injector:sass" (injector) task[24m
+[90mMissing option `template`, using `dest` as template instead[39m
+Injecting [32mscss[39m files [90m(5 files)[39m
+
+[4mRunning "concurrent:server" (concurrent) task[24m
+
+    [4mRunning "sass:server" (sass) task[24m
+    [33mWarning: 
+    You need to have Ruby and Sass installed and in your PATH for this task to work.
+    More info: https://github.com/gruntjs/grunt-contrib-sass
+     Use --force to continue.[39m
+
+    [31mAborted due to warnings.[39m
+
+
+    [4mExecution Time[24m[90m (2017-04-01 02:54:26 UTC-3)[39m
+    loading tasks               [34m204ms[39m  [34m▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 89%[39m
+    loading grunt-contrib-sass   [34m16ms[39m  [34m▇▇▇ 7%[39m
+    sass:server                   [34m8ms[39m  [34m▇▇ 3%[39m
+    [35mTotal 229ms[39m
+[33mWarning:  Use --force to continue.[39m
+
+[31mAborted due to warnings.[39m
+
+
+Execution Time (2017-04-01 02:54:26 UTC-3)
+loading tasks             191ms  ▇▇▇▇▇▇▇▇▇▇ 27%
+injector:sass              16ms  ▇ 2%
+loading grunt-concurrent   24ms  ▇▇ 3%
+concurrent:server         463ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 65%
+Total 714ms
+

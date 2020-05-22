@@ -1,0 +1,40 @@
+<!-- visão -->
+
+<navbar></navbar>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h1>Deixe um comentário para nós! Sua avaliação é muito importante para melhorarmos a forma de atendê-lo!!</h1>
+          </div>
+          <div class="col-sm-12" data-ng-controller="ContactCtrl as contact">
+            <form class="form" name="contactForm" data-ng-submit="contact.sendMail()">
+
+              <div class="form-group">
+                <label>Nome: </label><br>
+
+                <input type="text" name="nome" ng-model="contact.contactName" required size="52" value=""><br><br>
+              </div>
+
+              <div class="form-group">
+                <label>E-Mail: </label><br>
+
+                <input type="email" ng-model="contact.contactEmail" required name="email" size="52" value="">
+              </div>
+
+              <div class="form-group">
+                <label>Comentários: </label><br>
+
+                <textarea name="mensagem" ng-model="contact.contactMsg" required rows="08" cols="52" wrap="virtual"></textarea>
+              </div>
+
+              <div>
+                <input type="submit" class="btn btn-inverse btn-lg" ng-class="{ (contactForm.$dirty && contactForm.$valid) }" name="Enviar" value="Enviar" >
+                <input type="reset" class="btn btn-inverse btn-lg" name="Apagar" value="Apagar"> </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+<footer></footer>

@@ -1,0 +1,71 @@
+<navbar></navbar>
+
+<div class="container">
+  <p>As rotas api do índice de usuário e usuário de exclusão são restritas aos usuários com a função 'admin'.</p>
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="user in users">
+        <strong>{{user.name}}</strong><br>
+        <span class="text-muted">{{user.email}}</span>
+        <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+    </li>
+</ul>
+
+<div class="container">
+  <h1>Usuários</h1>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <tr>
+        <th>Usuário</th>
+        <th>Função</th>
+        <th>Provedor</th>
+        <th>Ações</th>
+      </tr>
+      <tr ng-repeat="user in users">
+        <td>{{user.name}} <span class="text-muted">{{user.email}}</span></td>
+        <td class="success" ng-class="{'success' : user.role == 'admin', 'info': user.role == 'user' }">{{user.role}}</td>
+        <td>{{user.provider}}</td>
+        <td>
+          <a ng-click="deleteUser(user)"><i class="fa fa-2x fa-trash-o"></i></a>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <h1>Produtos</h1>
+  <div class="table-responsive">
+    <table class="table table-b">
+      <tr>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Estoque</th>
+        <!--th>Categoria</th-->
+        <th>Ações</th>
+      </tr>
+      <tr ng-repeat="product in products">
+        <td>{{product.title}}</td>
+        <td>{{product.price | currency}}</td>
+        <td>{{product.stock}}</td>
+        <!--td>
+          <span ng-repeat="category in product.categories">
+            <a ui-sref="productCatalog({slug: category.slug})">{{category.name}}</a>
+          </span>
+        </td-->
+        <td>
+          <a ng-click="showProduct(product)">
+            <i class="fa fa-2x fa-eye"></i></a>
+          <a ng-click="editProduct(product)">
+            <i class="fa fa-2x fa-pencil"></i></a>
+          <a ng-click="deleteProduct(product)">
+            <i class="fa fa-2x fa-trash-o"></i></a>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <form class="thing-form">
+    <label>Adicionar seus Produtos</label>
+    <p class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" ui-sref="newProduct()">Adicionar Novo</button>
+      </span>
+    </p>
+  </form>
+</div>
